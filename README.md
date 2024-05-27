@@ -75,5 +75,6 @@ alienfx-cli all=255,0,0
 ```
 
 # Special thanks to:
-[T-Troll]https://github.com/T-Troll With some notes on the hexdata payload on his windows take on the SDK [alienfx-tools]https://github.com/T-Troll/alienfx-tools
-[Cheaterman](https://gist.github.com/Cheaterman) for the LIBUSB example usage [elc_ng.py](https://gist.github.com/Cheaterman/accd912c6886f4055f45d0594b88553c)
+- [T-Troll]https://github.com/T-Troll With some notes on the hexdata payload on his windows take on the SDK [alienfx-tools]https://github.com/T-Troll/alienfx-tools
+
+- [Cheaterman](https://gist.github.com/Cheaterman) for the LIBUSB example usage [elc_ng.py](https://gist.github.com/Cheaterman/accd912c6886f4055f45d0594b88553c)
