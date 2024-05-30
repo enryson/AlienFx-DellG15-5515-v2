@@ -87,7 +87,7 @@ bool USBDeviceHandler::sendPayload(const uint8_t *payload, size_t payloadSize )
     int r = libusb_interrupt_transfer(handle, LIBUSB_ENDPOINT_OUT | 1, (unsigned char *)payload, 32, &transferred, 0);
     if (r == 0 && transferred == 32)
     {
-        std::cout << "Payload enviado com sucesso" << std::endl;
+        // std::cout << "Payload enviado com sucesso" << std::endl;
         return true;
     }
     else

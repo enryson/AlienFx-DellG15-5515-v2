@@ -4,22 +4,41 @@
 class LightFX
 {
 public:
-    const uint8_t *Init();
+    const uint8_t *Init(int mode);
     const uint8_t *Reset();
+    const uint8_t *HardReset();
     const uint8_t *Region(int region);
     const uint8_t *Color(int red, int green, int blue);
-    const uint8_t *Save();
+    const uint8_t *Save(int mode);
 };
-const uint8_t* LightFX::Init()
+const uint8_t* LightFX::Init(int mode)
 {
     uint8_t* payloadInit = new uint8_t[32];
     payloadInit[0] = 0x03;
     payloadInit[1] = 0x21;
     payloadInit[2] = 0x00;
-    payloadInit[3] = 0x01;
-    payloadInit[4] = 0xff;
-    payloadInit[5] = 0xff;
+    if (mode == 1) // clean
+        payloadInit[3] = 0x04;
+    if (mode == 2) // start new
+        payloadInit[3] = 0x01;
+    payloadInit[4] = 0x00;
+    payloadInit[5] = 0x61;
     std::memset(payloadInit + 6, 0, 32 - 6);
+    return payloadInit;
+}
+
+const uint8_t* LightFX::HardReset()
+{
+    uint8_t* payloadInit = new uint8_t[32];
+    payloadInit[0] = 0x03;
+    payloadInit[1] = 0xff;
+    payloadInit[2] = 0x80;
+    payloadInit[3] = 0x00;
+    payloadInit[4] = 0x03;
+    payloadInit[5] = 0xe8;
+    payloadInit[6] = 0x3c;
+    payloadInit[7] = 0xff;
+    std::memset(payloadInit + 8, 0, 32 - 8);
     return payloadInit;
 }
 
@@ -37,6 +56,7 @@ const uint8_t* LightFX::Reset()
     std::memset(payloadInit + 8, 0, 32 - 8);
     return payloadInit;
 }
+
 
 const uint8_t *LightFX::Region(int region)
 {
@@ -105,16 +125,19 @@ const uint8_t *LightFX::Color(int red, int green, int blue)
     return payloadColor;
 }
 
-const uint8_t *LightFX::Save()
+const uint8_t *LightFX::Save(int mode)
 {
-    uint8_t* payloadColor = new uint8_t[32];
-    payloadColor[0] = 0x03;
-    payloadColor[1] = 0x21;
-    payloadColor[2] = 0x00;
-    payloadColor[3] = 0x03;
-    payloadColor[4] = 0x00;
-    payloadColor[5] = 0xff;
+    uint8_t* payloadSave = new uint8_t[32];
+    payloadSave[0] = 0x03;
+    payloadSave[1] = 0x21;
+    payloadSave[2] = 0x00;
+    if (mode == 1) // finish and save
+        payloadSave[3] = 0x02;
+    if (mode == 2) // set default
+        payloadSave[3] = 0x06;
+    payloadSave[4] = 0x00;
+    payloadSave[5] = 0x61;
 
-    std::memset(payloadColor + 5, 0, 32 - 5);
-    return payloadColor;
+    std::memset(payloadSave + 6, 0, 32 - 6);
+    return payloadSave;
 }
