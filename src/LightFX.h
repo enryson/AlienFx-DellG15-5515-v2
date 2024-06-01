@@ -11,6 +11,7 @@ public:
     const uint8_t *Color(int red, int green, int blue);
     const uint8_t *Save(int mode);
 };
+
 const uint8_t* LightFX::Init(int mode)
 {
     uint8_t* payloadInit = new uint8_t[32];
@@ -56,7 +57,6 @@ const uint8_t* LightFX::Reset()
     std::memset(payloadInit + 8, 0, 32 - 8);
     return payloadInit;
 }
-
 
 const uint8_t *LightFX::Region(int region)
 {
