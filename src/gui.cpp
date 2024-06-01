@@ -26,7 +26,6 @@ protected:
 MainWindow::MainWindow(BaseObjectType *cobject, const Glib::RefPtr<Gtk::Builder> &builder)
     : Gtk::Window(cobject)
 {
-  
 
   builder->get_widget("key_color_left", m_ColorButtonLeft);
   builder->get_widget("key_color_center_left", m_ColorButtonCenterLeft);
@@ -71,10 +70,18 @@ void MainWindow::on_apply_button_pressed()
   Gdk::RGBA colorAll = m_ColorButtonAll->get_rgba();
 
   std::map<std::string, std::vector<int>> zones;
-  zones["0"] = {colorLeft.get_red() * 255, colorLeft.get_green() * 255, colorLeft.get_blue() * 255};
-  zones["1"] = {colorCenterLeft.get_red() * 255, colorCenterLeft.get_green() * 255, colorCenterLeft.get_blue() * 255};
-  zones["2"] = {colorCenterRight.get_red() * 255, colorCenterRight.get_green() * 255, colorCenterRight.get_blue() * 255};
-  zones["3"] = {colorRight.get_red() * 255, colorRight.get_green() * 255, colorRight.get_blue() * 255};
+  zones["0"] = {static_cast<int>(colorLeft.get_red() * 255),
+                static_cast<int>(colorLeft.get_green() * 255),
+                static_cast<int>(colorLeft.get_blue() * 255)};
+  zones["1"] = {static_cast<int>(colorCenterLeft.get_red() * 255),
+                static_cast<int>(colorCenterLeft.get_green() * 255),
+                static_cast<int>(colorCenterLeft.get_blue() * 255)};
+  zones["2"] = {static_cast<int>(colorCenterRight.get_red() * 255),
+                static_cast<int>(colorCenterRight.get_green() * 255),
+                static_cast<int>(colorCenterRight.get_blue() * 255)};
+  zones["3"] = {static_cast<int>(colorRight.get_red() * 255),
+                static_cast<int>(colorRight.get_green() * 255),
+                static_cast<int>(colorRight.get_blue() * 255)};
   alienFX.SetColorZones(zones);
   // std::cout << "Esquerda: R=" << colorLeft.get_red() * 255 << ", G=" << colorLeft.get_green() * 255 << ", B=" << colorLeft.get_blue() * 255 << std::endl;
   // std::cout << "Centro Esquerda: R=" << colorCenterLeft.get_red() * 255 << ", G=" << colorCenterLeft.get_green() * 255 << ", B=" << colorCenterLeft.get_blue() * 255 << std::endl;
