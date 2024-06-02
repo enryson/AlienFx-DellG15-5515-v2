@@ -13,8 +13,11 @@ protected:
   // Signal handlers:
   void on_color_set();
   void on_apply_button_pressed();
+  void on_switch_state_set();
 
   // Member widgets:
+  Gtk::Grid *m_Grid;
+  Gtk::Switch *m_Switch;
   Gtk::ColorButton *m_ColorButtonLeft;
   Gtk::ColorButton *m_ColorButtonCenterLeft;
   Gtk::ColorButton *m_ColorButtonCenterRight;
@@ -26,7 +29,8 @@ protected:
 MainWindow::MainWindow(BaseObjectType *cobject, const Glib::RefPtr<Gtk::Builder> &builder)
     : Gtk::Window(cobject)
 {
-
+  builder->get_widget("mainGrid", m_Grid);
+  builder->get_widget("color_switch", m_Switch);
   builder->get_widget("key_color_left", m_ColorButtonLeft);
   builder->get_widget("key_color_center_left", m_ColorButtonCenterLeft);
   builder->get_widget("key_color_center_right", m_ColorButtonCenterRight);
@@ -34,28 +38,50 @@ MainWindow::MainWindow(BaseObjectType *cobject, const Glib::RefPtr<Gtk::Builder>
   builder->get_widget("ZoneAll", m_ColorButtonAll);
   builder->get_widget("apply", m_ApplyButton);
 
-  if (!m_ColorButtonLeft || !m_ColorButtonCenterLeft || !m_ColorButtonCenterRight || !m_ColorButtonRight || !m_ApplyButton)
-  {
-    std::cerr << "Erro ao carregar os widgets do arquivo Glade." << std::endl;
-    std::exit(1);
-  }
-
   m_ColorButtonLeft->signal_color_set().connect(sigc::mem_fun(*this, &MainWindow::on_color_set));
   m_ColorButtonCenterLeft->signal_color_set().connect(sigc::mem_fun(*this, &MainWindow::on_color_set));
   m_ColorButtonCenterRight->signal_color_set().connect(sigc::mem_fun(*this, &MainWindow::on_color_set));
   m_ColorButtonRight->signal_color_set().connect(sigc::mem_fun(*this, &MainWindow::on_color_set));
   m_ApplyButton->signal_pressed().connect(sigc::mem_fun(*this, &MainWindow::on_apply_button_pressed));
+
+  m_Switch->set_active(true);
+  m_ColorButtonAll->show();
+  m_Grid->hide();
+  m_Switch->property_active().signal_changed().connect(sigc::mem_fun(*this, &MainWindow::on_switch_state_set));
 }
 
 MainWindow::~MainWindow()
 {
 }
+void MainWindow::on_switch_state_set()
+{
+  m_ColorButtonAll->hide();
+  if (m_Switch->get_active())
+  {
+    m_ColorButtonAll->show();
+    m_Grid->hide();
+    // std::cout << "Switch is ON" << std::endl;
+  }
+  else
+  {
+    m_ColorButtonAll->hide();
+    m_Grid->show();
+    // std::cout << "Switch is OFF" << std::endl;
+  }
+}
+
+// bool on_switch_state_set(Gtk::Switch *widget, bool state)
+// {
+//   // Código a ser executado quando o estado do switch mudar
+//   std::cout << "Switch state set to: " << (state ? "ON" : "OFF") << std::endl;
+//   return false; // Retorne true para impedir outras handlers de serem executadas
+// }
 
 void MainWindow::on_color_set()
 {
   // Placeholder for handling color set event.
   // Here you can update any labels or perform other actions when the color changes.
-  std::cout << "Cor alterada em um dos botões de cor." << std::endl;
+  // std::cout << "Cor alterada em um dos botões de cor." << std::endl;
 }
 
 void MainWindow::on_apply_button_pressed()
@@ -82,15 +108,15 @@ void MainWindow::on_apply_button_pressed()
   zones["3"] = {static_cast<int>(colorRight.get_red() * 255),
                 static_cast<int>(colorRight.get_green() * 255),
                 static_cast<int>(colorRight.get_blue() * 255)};
-  alienFX.SetColorZones(zones);
-  // std::cout << "Esquerda: R=" << colorLeft.get_red() * 255 << ", G=" << colorLeft.get_green() * 255 << ", B=" << colorLeft.get_blue() * 255 << std::endl;
-  // std::cout << "Centro Esquerda: R=" << colorCenterLeft.get_red() * 255 << ", G=" << colorCenterLeft.get_green() * 255 << ", B=" << colorCenterLeft.get_blue() * 255 << std::endl;
-  // std::cout << "Centro Direita: R=" << colorCenterRight.get_red() * 255 << ", G=" << colorCenterRight.get_green() * 255 << ", B=" << colorCenterRight.get_blue() * 255 << std::endl;
-  // std::cout << "Direita: R=" << colorRight.get_red() * 255 << ", G=" << colorRight.get_green() * 255 << ", B=" << colorRight.get_blue() * 255 << std::endl;
 
-  // alienFX.SetColorZones(zones);
-
-  // alienFX.SetColorAll(colorAll.get_red()* 255 , colorAll.get_green()* 255 , colorAll.get_blue()* 255 );
+  if (m_Switch->get_active())
+  {
+    alienFX.SetColorAll(colorAll.get_red() * 255, colorAll.get_green() * 255, colorAll.get_blue() * 255);
+  }
+  else
+  {
+    alienFX.SetColorZones(zones);
+  }
 }
 
 int main(int argc, char *argv[])

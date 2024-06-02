@@ -62,7 +62,7 @@
     <signal name="destroy" handler="on_window_destroy" swapped="no"/>
     <child>
       <!-- n-columns=4 n-rows=1 -->
-      <object class="GtkGrid">
+      <object class="GtkGrid" id="mainGrid">
         <property name="visible">True</property>
         <property name="can-focus">False</property>
         <child>
@@ -76,7 +76,6 @@
           <packing>
             <property name="left-attach">0</property>
             <property name="top-attach">0</property>
-            <property name="width">2</property>
           </packing>
         </child>
         <child>
@@ -169,13 +168,23 @@
           </packing>
         </child>
         <child>
-          <object class="GtkSwitch" id="AllToggle">
+          <object class="GtkSwitch" id="color_switch">
             <property name="visible">True</property>
             <property name="can-focus">True</property>
             <property name="active">True</property>
           </object>
           <packing>
             <property name="position">3</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="label" translatable="yes">AllLights</property>
+          </object>
+          <packing>
+            <property name="position">4</property>
           </packing>
         </child>
       </object>
