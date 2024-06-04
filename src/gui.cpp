@@ -70,25 +70,14 @@ void MainWindow::on_switch_state_set()
   }
 }
 
-// bool on_switch_state_set(Gtk::Switch *widget, bool state)
-// {
-//   // Código a ser executado quando o estado do switch mudar
-//   std::cout << "Switch state set to: " << (state ? "ON" : "OFF") << std::endl;
-//   return false; // Retorne true para impedir outras handlers de serem executadas
-// }
-
 void MainWindow::on_color_set()
 {
-  // Placeholder for handling color set event.
-  // Here you can update any labels or perform other actions when the color changes.
   // std::cout << "Cor alterada em um dos botões de cor." << std::endl;
 }
 
 void MainWindow::on_apply_button_pressed()
 {
   AlienFx_SDK alienFX;
-  // std::cout << "Botão aplicar pressionado. Cores selecionadas:" << std::endl;
-
   Gdk::RGBA colorLeft = m_ColorButtonLeft->get_rgba();
   Gdk::RGBA colorCenterLeft = m_ColorButtonCenterLeft->get_rgba();
   Gdk::RGBA colorCenterRight = m_ColorButtonCenterRight->get_rgba();
@@ -127,7 +116,14 @@ int main(int argc, char *argv[])
   Glib::RefPtr<Gtk::Builder> builder = Gtk::Builder::create();
   try
   {
-    builder->add_from_file("layout.glade");
+    try
+    {
+      builder->add_from_file("layout.glade");
+    }
+    catch (const Glib::FileError &ex)
+    {
+      builder->add_from_file("/usr/local/share/alienfx-gui/layout.glade");
+    }
   }
   catch (const Glib::FileError &ex)
   {
@@ -143,6 +139,20 @@ int main(int argc, char *argv[])
     std::cerr << "Erro ao instanciar a janela principal." << std::endl;
     return 1;
   }
+
+  window->set_icon_name("AlienLogoDarkIcon");
+  // window->set_from_icon_name("/usr/local/share/alienfx-gui/icons/128x128/AlienLogoDarkIcon.png");
+
+  auto image = Gtk::make_managed<Gtk::Image>();
+  image->set_from_icon_name("AlienLogoDarkIcon", Gtk::ICON_SIZE_DIALOG);
+  window->add(*image);
+
+
+  // if (!window->set_icon_from_file("/usr/local/share/alienfx-gui/icons/128x128/AlienLogoDarkIcon.png"))
+  // {
+  //   std::cerr << "Erro ao definir o ícone da janela." << std::endl;
+  //   return 1;
+  // }
 
   return app->run(*window);
 }

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.1
+Name=AlienFX
+Comment=AlienFX
+Exec=/usr/local/bin/alienfx-gui
+Path=/usr/local/bin/
+Icon=usr/local/share/alienfx-gui/icons/128x128/AlienLogoDarkIcon.png
+Terminal=false
+Type=Application
+Categories=Utility;Application;
