@@ -64,7 +64,7 @@ int AlienFx_SDK::SetColorZones(const std::map<std::string, std::vector<int>> &zo
     payloads.addPayload(LFX.Init(1));
     payloads.addPayload(LFX.Init(2));
 
-    int counter = 3;
+    int counter = 0;
     for (const auto &pair : zones)
     {
         payloads.addPayload(LFX.Region(counter));

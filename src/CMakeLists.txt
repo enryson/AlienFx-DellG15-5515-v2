@@ -26,6 +26,7 @@ add_executable(alienfx-cli
   USBDeviceHandler.h
   PayloadAgregation.h
   AlienFx_SDK.h
+  mainwindow.h mainwindow.cpp mainwindow.ui
 )
 
 # Linkar a biblioteca libusb-1.0

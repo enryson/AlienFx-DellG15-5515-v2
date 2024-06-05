@@ -1,5 +1,20 @@
 {
+    "cmake.sourceDirectory": "/home/enry/Documents/GitHub/AlienFx-DellG15-5515-v2/src",
+    "cmake.debugConfig": {
+        "stopAtEntry": true,
+        "args": [
+            "all=255,255,0"
+        ],
+        "MIMode": "gdb",
+        "externalConsole": false,
+    },
+    "cmake.configureArgs": [
+           "-DOPTIONA=ON",
+           "-DOPTIONB=ON"
+    ],
     "files.associations": {
+        "cstdint": "cpp",
+        "iosfwd": "cpp",
         "cctype": "cpp",
         "clocale": "cpp",
         "cmath": "cpp",
@@ -21,7 +36,6 @@
         "compare": "cpp",
         "concepts": "cpp",
         "condition_variable": "cpp",
-        "cstdint": "cpp",
         "deque": "cpp",
         "list": "cpp",
         "set": "cpp",
@@ -44,7 +58,6 @@
         "utility": "cpp",
         "format": "cpp",
         "initializer_list": "cpp",
-        "iosfwd": "cpp",
         "iostream": "cpp",
         "istream": "cpp",
         "limits": "cpp",
@@ -70,6 +83,7 @@
         "locale": "cpp",
         "queue": "cpp",
         "semaphore": "cpp",
-        "stack": "cpp"
-    }
+        "stack": "cpp",
+        "any": "cpp"
+    },
 }

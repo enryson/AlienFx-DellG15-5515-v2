@@ -2,19 +2,6 @@
     "tasks": [
         {
             "type": "cppbuild",
-            "label": "Custom Build",
-            "command": "compilescript",
-            "options": {
-                "cwd": "compiledir"
-            },
-            "problemMatcher": [
-                "$gcc"
-            ],
-            "group": "build",
-            "detail": "compile using the custom build script."
-        },
-        {
-            "type": "cppbuild",
             "label": "C/C++: g++ build active file",
             "command": "/usr/bin/g++",
             "args": [
@@ -22,7 +9,8 @@
                 "-g",
                 "${file}",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
+                "${fileDirname}/${fileBasenameNoExtension}",
+                "-lusb-1.0"
             ],
             "options": {
                 "cwd": "${fileDirname}"

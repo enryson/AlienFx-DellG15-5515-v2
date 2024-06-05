@@ -1,16 +1,15 @@
-# AlienFX for Dell G15 5515 v2 (C++ edition)
+# AlienFX for Dell G15 5515 v2 (C++ edition) and GTK3
 
 #### Disclaimer
 Now you can control the keyboard lights on a DELL G15 5515.
 For now this is a terminal application write using C++ for better performance and control, and implementing a PROTO-SDK of the ALIENFX.
-
-the goal is to write a GUI APP and a API so softwares can interact with.
 
 This new implementation fixes all the bugs with the PYTHON version
 A complete stable way to using the lights
 
 ## Features
 - Control the 4 zones of the keyboard
+- GUI APP using GTK3
 
 ## Upcoming
 - Installer
@@ -60,7 +59,14 @@ sudo cp rules/10-alienfx.rules /etc/udev/rules.d/
 ```
 
 # Finally!
+## GUI Usage
+Control all lights at once.
+![alt text](./images/AllLights.png)
+Or control each zone
+![alt text](./images/Zones.png)
 
+
+## Terminal Usage
 Usage
 ```sh
 alienfx-cli all=255,255,255
