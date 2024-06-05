@@ -60,9 +60,9 @@ sudo cp rules/10-alienfx.rules /etc/udev/rules.d/
 
 # Finally!
 ## GUI Usage
-Control all lights at once.
+### Control all lights at once.
 ![alt text](./images/AllLights.png)
-Or control each zone
+### Or control each zone
 ![alt text](./images/Zones.png)
 
 
