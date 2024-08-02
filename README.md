@@ -2,7 +2,8 @@
 
 #### Disclaimer
 Now you can control the keyboard lights on a DELL G15 5515.
-For now this is a terminal application write using C++ for better performance and control, and implementing a PROTO-SDK of the ALIENFX.
+For now thi
+sudo pacman -S s is a terminal application write using C++ for better performance and control, and implementing a PROTO-SDK of the ALIENFX.
 
 This new implementation fixes all the bugs with the PYTHON version
 A complete stable way to using the lights
@@ -23,7 +24,8 @@ A complete stable way to using the lights
 
 Depenencies (Arch Linux)
 ```sh
-sudo pacman -S libusb libstdc++ gcc-libs glibc systemd libcap
+sudo pacman -S libusb gtkmm3 gcc-libs glibc systemd libcap
+
 ```
 Depenencies (Debian)
 ```sh
