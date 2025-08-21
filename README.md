@@ -30,7 +30,7 @@ sudo pacman -S libusb gtkmm3 gcc-libs glibc systemd libcap
 Depenencies (Debian)
 ```sh
 sudo apt-get update
-sudo apt-get install libusb-1.0-0 libstdc++6 libc6 libgcc1 libudev1 libcap2
+sudo apt-get install libusb-1.0-0 libusb-1.0-0-dev libstdc++6 libc6 libgcc1 libudev1 libcap2 gtkmm3.0
 ```
 
 Depenencies (fedora)
